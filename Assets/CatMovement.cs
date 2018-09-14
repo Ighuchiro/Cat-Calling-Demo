@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CatMovement : MonoBehaviour
 {
-
     public int timeMin = 0;
     public int timeMax = 10;
     private GameObject playerStatus;
