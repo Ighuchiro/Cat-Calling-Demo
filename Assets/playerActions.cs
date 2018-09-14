@@ -21,6 +21,7 @@ public class playerActions : MonoBehaviour {
         var usingAttractor = Input.GetKeyDown(KeyCode.Q);
         var usingRepeller = Input.GetKeyDown(KeyCode.E);
         var usingNone = Input.GetKeyDown(KeyCode.R);
+
         if (usingNone == true)
         {
             itemID = 0;
