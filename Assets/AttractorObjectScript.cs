@@ -13,4 +13,5 @@ public class AttractorObjectScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
 }
