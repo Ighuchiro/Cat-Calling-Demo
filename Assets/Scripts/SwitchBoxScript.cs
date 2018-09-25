@@ -10,6 +10,7 @@ public class SwitchBoxScript : MonoBehaviour {
     private GameObject sprinklerGroup3;
     private int collisionCount = 0;
     public int sprinklerPattern = 1;
+    public AudioSource triggerSound;
 
 
     // Use this for initialization
@@ -54,6 +55,7 @@ public class SwitchBoxScript : MonoBehaviour {
             var group3 = Input.GetKeyDown(KeyCode.C);
             if (group1 == true)
             {
+                triggerSound.Play();
                 sprinklerPattern = 1;
                 sprinklerGroup1.SetActive(true);
                 sprinklerGroup2.SetActive(true);
@@ -61,6 +63,7 @@ public class SwitchBoxScript : MonoBehaviour {
             }
             if (group2 == true)
             {
+                triggerSound.Play();
                 sprinklerPattern = 2;
                 sprinklerGroup1.SetActive(true);
                 sprinklerGroup2.SetActive(false);
@@ -68,6 +71,7 @@ public class SwitchBoxScript : MonoBehaviour {
             }
             else if (group3 == true)
             {
+                triggerSound.Play();
                 sprinklerPattern = 3;
                 sprinklerGroup1.SetActive(false);
                 sprinklerGroup2.SetActive(true);
