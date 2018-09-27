@@ -7,7 +7,7 @@ public class LawnmowerScript : MonoBehaviour {
     public Vector3 endPos;
     float moveSpeed;
     Rigidbody body;
-
+    public AudioSource sound;
 	// Use this for initialization
 	void Start () {
         startPos = this.transform.position;
@@ -21,6 +21,7 @@ public class LawnmowerScript : MonoBehaviour {
         {
             GameObject noiseObj = GameObject.FindGameObjectWithTag("noise");
             noiseObj.gameObject.GetComponent<Renderer>().enabled = true;
+            sound.volume = sound.volume * 2;
         }
     }
     void OnTriggerExit(Collider other)
@@ -29,6 +30,8 @@ public class LawnmowerScript : MonoBehaviour {
         {
             GameObject noiseObj = GameObject.FindGameObjectWithTag("noise");
             noiseObj.gameObject.GetComponent<Renderer>().enabled = false;
+            sound.volume = sound.volume / 2;
+
         }
     }
 
