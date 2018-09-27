@@ -60,6 +60,7 @@
      <Compile Include="Assets\goalScript.cs" />
      <Compile Include="Assets\LawnmowerScript.cs" />
      <Compile Include="Assets\movement.cs" />
+     <Compile Include="Assets\movingSprinklerScript.cs" />
      <Compile Include="Assets\playerActions.cs" />
      <Compile Include="Assets\playermovement.cs" />
      <Compile Include="Assets\RatScript.cs" />
