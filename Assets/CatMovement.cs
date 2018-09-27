@@ -31,6 +31,13 @@ public class CatMovement : MonoBehaviour
     public float ratDist;
     private int health;
 
+    private int song = 0;
+
+    public AudioSource happySound1;
+    public AudioSource angrySound1;
+
+    
+    
 
     // Use this for initialization
     void Start()
@@ -49,8 +56,24 @@ public class CatMovement : MonoBehaviour
         transform.Rotate(rotation);
         randomDir = this.transform.forward;
         effectDistLim = 5.0f;
-        currentHazard = GameObject.FindGameObjectWithTag("Sphere");
+        currentHazard = GameObject.FindGameObjectWithTag("sprinkler");
         health = 2;
+
+        //System.Random pick = new System.Random();
+        //song = pick.Next(0, 3);
+        //if (song == 0)
+        //{
+        //    sound = happySound1;
+        //}
+        //if (song == 1)
+        //{
+        //    sound = happySound2;
+        //}
+        //if (song == 2)
+        //{
+        //    sound = happySound3;
+        //}
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -58,6 +81,7 @@ public class CatMovement : MonoBehaviour
         {
             if (noiseObject.GetComponent<Renderer>().enabled == true)
             {
+                angrySound1.Play();
                 health--;
             }
 
@@ -65,7 +89,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.name == "Sphere")
         {
             collisionCount++;
-            currentHazard = GameObject.FindGameObjectWithTag("Sphere");
+            angrySound1.Play();
+            currentHazard = GameObject.FindGameObjectWithTag("SprinklerGroup1");
             health--;
 
         }
@@ -80,7 +105,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.name == "Sphere (2)")
         {
             collisionCount++;
-            currentHazard = GameObject.FindGameObjectWithTag("Sphere (2)");
+            angrySound1.Play();
+            currentHazard = GameObject.FindGameObjectWithTag("SprinklerGroup1");
             health--;
 
 
@@ -96,7 +122,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.name == "Sphere (4)")
         {
             collisionCount++;
-            currentHazard = GameObject.FindGameObjectWithTag("Sphere (4)");
+            angrySound1.Play();
+            currentHazard = GameObject.FindGameObjectWithTag("SprinklerGroup2");
             health--;
 
 
@@ -112,7 +139,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.name == "Sphere (6)")
         {
             collisionCount++;
-            currentHazard = GameObject.FindGameObjectWithTag("Sphere (6)");
+            angrySound1.Play();
+            currentHazard = GameObject.FindGameObjectWithTag("SprinklerGroup3");
             health--;
 
 
@@ -120,7 +148,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.name == "Sphere (7)")
         {
             collisionCount++;
-            currentHazard = GameObject.FindGameObjectWithTag("Sphere (7)");
+            angrySound1.Play();
+            currentHazard = GameObject.FindGameObjectWithTag("SprinklerGroup3");
             health--;
 
 
@@ -142,7 +171,8 @@ public class CatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health == 2)
+
+        if (health == 2)
         {
             ///this.gameObject.gameObject.GetComponent<Material>().
         }
@@ -158,10 +188,18 @@ public class CatMovement : MonoBehaviour
         dist2 = Vector3.Distance(currentHazard.transform.position, this.transform.position);
         ratDist = Vector3.Distance(ratObject.transform.position, this.transform.position);
 
+
+        if ((playerAct.itemID == 0 || playerAct.itemID == 2) && dist < 15)
+        {
+            happySound1.Play();
+        }
+
+
         if (collisionCount > 0)
         {
             if (dist2 <= 10.0f)
             {
+                
                 Vector3 target = new Vector3(currentHazard.transform.position.x, this.transform.position.y, currentHazard.transform.position.z);
                 this.transform.LookAt(target);
                 targetDir = new Vector3(currentHazard.transform.position.x - this.transform.position.x, this.transform.position.y, currentHazard.transform.position.z - this.transform.position.z);  //= this.transform.forward;
@@ -183,11 +221,13 @@ public class CatMovement : MonoBehaviour
         }
         else if (playerAct.itemID == 1 && dist < effectDistLim)
         {
+            
             Vector3 target = new Vector3(playerStatus.transform.position.x, this.transform.position.y, playerStatus.transform.position.z);
             this.transform.LookAt(target);
             targetDir = new Vector3(playerStatus.transform.position.x - this.transform.position.x, this.transform.position.y, playerStatus.transform.position.z - this.transform.position.z);  //= this.transform.forward;
             Vector3 nextPos = this.transform.position + targetDir.normalized * Time.deltaTime * 5.0f;
             catBody.MovePosition(nextPos);
+            
         }
         else if (playerAct.itemID == 2 && dist < effectDistLim)
         {
