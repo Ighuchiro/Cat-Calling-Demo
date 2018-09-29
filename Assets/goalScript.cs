@@ -20,7 +20,7 @@ public class goalScript : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Cat" || other.gameObject.name == "Cat (1)" || other.gameObject.name == "Cat (2)" || other.gameObject.name == "Cat (3)")
+        if (other.gameObject.tag == "Cat")
         {
             other.gameObject.SetActive(false);
             if (timer >= timeLimit)

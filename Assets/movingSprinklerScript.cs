@@ -62,7 +62,7 @@ void Update () {
         newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
         if((rotated == false && Mathf.Abs(targetDir.x - newDir.x) <= .0001) || (rotated == true && Mathf.Abs(targetDir.z - newDir.z) <= .0001))
         {
-            print("hello");
+
             if(rotated == true)
             {
                 rotated = false;

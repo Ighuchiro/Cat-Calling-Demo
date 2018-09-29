@@ -27,8 +27,13 @@ public class LawnmowerScript : MonoBehaviour {
     {
         if (other.gameObject.name == "Noise")
         {
-            GameObject noiseObj = GameObject.FindGameObjectWithTag("noise");
-            noiseObj.gameObject.GetComponent<Renderer>().enabled = false;
+            GameObject noiseObj = GameObject.FindGameObjectWithTag("noiseAmbient");
+            if (noiseObj.gameObject.name != "Noise (1)")
+            {
+                print("off");
+                noiseObj.gameObject.GetComponent<Renderer>().enabled = false;
+
+            }
         }
     }
 
