@@ -30,6 +30,8 @@ public class CatMovement : MonoBehaviour
     private float dist2=100.0f;
     public float ratDist;
     private int health;
+    public AudioSource happySound;
+    public AudioSource angrySound;
 
 
     // Use this for initialization
@@ -60,6 +62,7 @@ public class CatMovement : MonoBehaviour
             {
                 health--;
             }
+            angrySound.Play();
 
         }
         if (other.gameObject.name == "Noise")
@@ -68,6 +71,8 @@ public class CatMovement : MonoBehaviour
             {
                 health--;
             }
+            angrySound.Play();
+
 
         }
         if (other.gameObject.tag == "sprinkler")
@@ -75,9 +80,10 @@ public class CatMovement : MonoBehaviour
             collisionCount++;
             currentHazard = other.gameObject;
             health--;
+            angrySound.Play();
 
         }
-        
+
 
     }
     void OnTriggerExit(Collider other)
@@ -97,11 +103,18 @@ public class CatMovement : MonoBehaviour
         }
         if(health <= 0)
         {
+            angrySound.Play();
             this.gameObject.SetActive(false);
+
         }
         dist = Vector3.Distance(playerStatus.transform.position, this.transform.position);
         dist2 = Vector3.Distance(currentHazard.transform.position, this.transform.position);
         ratDist = Vector3.Distance(ratObject.transform.position, this.transform.position);
+
+        if((playerAct.itemID == 0 || playerAct.itemID == 2) && effectDistLim > dist)
+        {
+            happySound.Play();
+        }
 
         if (collisionCount > 0)
         {
@@ -130,10 +143,12 @@ public class CatMovement : MonoBehaviour
         {
             Vector3 target = new Vector3(playerStatus.transform.position.x, this.transform.position.y, playerStatus.transform.position.z);
             this.transform.LookAt(target);
+            
             targetDir = new Vector3(playerStatus.transform.position.x - this.transform.position.x, this.transform.position.y, playerStatus.transform.position.z - this.transform.position.z);  //= this.transform.forward;
             Vector3 nextPos = this.transform.position + targetDir.normalized * Time.deltaTime * 5.0f;
             catBody.MovePosition(nextPos);
         }
+
         else if (playerAct.itemID == 2 && dist < effectDistLim)
         {
             Vector3 target = new Vector3(playerStatus.transform.position.x, this.transform.position.y, playerStatus.transform.position.z);
@@ -144,7 +159,7 @@ public class CatMovement : MonoBehaviour
 
         }
 
-        else if (playerAct.itemID == 0 || dist>= effectDistLim)
+        else if (playerAct.itemID == 0 || dist >= effectDistLim)
         {
             timer += Time.deltaTime;
             if (timer >= timeLimit)

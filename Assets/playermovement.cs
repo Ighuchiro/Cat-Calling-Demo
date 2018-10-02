@@ -13,5 +13,10 @@ public class playermovement : MonoBehaviour
 		transform.Translate(x, 0, 0);
 		transform.Translate(0, 0, z);
 		transform.Rotate (0, turn, 0);
-	}
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
 }

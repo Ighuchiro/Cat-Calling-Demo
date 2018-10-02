@@ -7,6 +7,7 @@ public class LawnmowerScript : MonoBehaviour {
     public Vector3 endPos;
     float moveSpeed;
     Rigidbody body;
+    public AudioSource sound;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,7 @@ public class LawnmowerScript : MonoBehaviour {
     {
         if (other.gameObject.name == "Noise")
         {
+            sound.volume *= 2;
             GameObject noiseObj = GameObject.FindGameObjectWithTag("noise");
             noiseObj.gameObject.GetComponent<Renderer>().enabled = true;
         }
@@ -27,6 +29,7 @@ public class LawnmowerScript : MonoBehaviour {
     {
         if (other.gameObject.name == "Noise")
         {
+            sound.volume /= 2;
             GameObject noiseObj = GameObject.FindGameObjectWithTag("noiseAmbient");
             if (noiseObj.gameObject.name != "Noise (1)")
             {

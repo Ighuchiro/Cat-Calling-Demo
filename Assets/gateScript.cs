@@ -6,6 +6,7 @@ public class gateScript : MonoBehaviour
 {
     int collisionCount = 0;
     bool open = false;
+    public AudioSource sound;
     // Use this for initialization
     void Start()
     {
@@ -39,11 +40,13 @@ public class gateScript : MonoBehaviour
                 print("open");
                 if (open == false)
                 {
+                    sound.Play();
                     this.transform.Rotate(new Vector3(0, 90, 0));
                     open = true;
                 }
                 else
                 {
+                    sound.Play();
                     this.transform.Rotate(new Vector3(0, -90, 0));
                     open = false;
                 }

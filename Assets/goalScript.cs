@@ -11,7 +11,7 @@ public class goalScript : MonoBehaviour {
     private float timer = 0.0f;
     public float timeLimit = 10.0f;
     public Text txt;
-
+    public AudioSource sound;
 
     // Use this for initialization
     void Start () {
@@ -23,6 +23,7 @@ public class goalScript : MonoBehaviour {
         if (other.gameObject.tag == "Cat")
         {
             other.gameObject.SetActive(false);
+            sound.Play();
             if (timer >= timeLimit)
             {
                 timer = 0.0f;
